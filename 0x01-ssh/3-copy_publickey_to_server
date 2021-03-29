@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+ ssh-copy-id -f -i ./id_rsa.pub ubuntu@35.231.183.219
