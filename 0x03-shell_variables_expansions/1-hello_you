@@ -1,2 +1,3 @@
 #! /bin/bash 
+#Script that prints hello user
 echo "hello" $USER
