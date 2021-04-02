@@ -6,4 +6,4 @@
  
 * 2-ssh_config : *Configuration file that will allow us to connect to a server without typing a password*
 
-* 3-copy_publickey_to_server *Script that sends to the server the public key id_rsa.pub and add it*
+* 3-copy_publickey_to_server : *Script that sends to the server the public key id_rsa.pub and add it*
