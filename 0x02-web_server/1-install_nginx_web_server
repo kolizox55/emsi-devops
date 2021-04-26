@@ -3,5 +3,5 @@
 sudo apt-get update -y
 sudo apt-get install nginx -y
 sudo chmod a+rw /var/www/test.html
-echo 'Holberton School' > /var/www/test.html
+echo 'Holberton School for the win!' > /var/www/test.html
 sudo service nginx restart
