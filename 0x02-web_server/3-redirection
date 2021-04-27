@@ -2,6 +2,6 @@
 #Script that will install nginx on a brand new ubuntu machine
 sudo apt-get update -y
 sudo apt-get install nginx -y
-echo "Holberton School" > /var/www/html/test.html
-sudo sed -i "s/server_name _;/server_name _;\nlocation \/redirect_me {\nroot /var/www/html;\nindex test.html;}\n/" /etc/nginx/sites-enabled/default
+echo "Holberton School" > /var/www/html/index.nginx-debian.html;
+sudo sed -i "s/server_name _;/server_name _;\nlocation \/redirect_me {\n return 301 https:\/\/mail.google.com\/;}\n/" /etc/nginx/sites-enabled/default
 sudo service nginx restart
