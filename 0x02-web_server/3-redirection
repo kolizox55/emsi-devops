@@ -3,5 +3,5 @@
 sudo apt-get update -y
 sudo apt-get install nginx -y
 echo "Holberton School" > /var/www/html/index.nginx-debian.html;
-sudo sed -i "s/server_name _;/server_name _;\nlocation \/redirect_me {\n return 301 https:\/\/mail.google.com\/;}\n/" /etc/nginx/sites-enabled/default
-sudo service nginx restart
+sed -i "s/server_name _;/server_name _;\nlocation \/redirect_me {\n return 301 https:\/\/mail.google.com\/;}\n/" /etc/nginx/sites-enabled/default
+service nginx restart
