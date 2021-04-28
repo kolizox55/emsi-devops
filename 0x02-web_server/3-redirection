@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 #Script that will install nginx on a brand new ubuntu machine
-sudo apt-get update -y
-sudo apt-get install nginx -y
-echo "Holberton School" > /var/www/html/index.nginx-debian.html > /dev/null
-sudo sed -i "s/server_name _;/server_name _;\nlocation \/redirect_me {\n return 301 https:\/\/mail.google.com\/;}\n/" /etc/nginx/sites-enabled/default
-sudo service nginx restart
+ADD301_REDIRECT="\\\tlocation /redirect_me {\n\t\t return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}\n"
 
+sudo apt-get update
+sudo apt-get -y install nginx
+#sudo service nginx start
+echo "Holberton School" | sudo tee /usr/share/nginx/html/index.html
+sudo sed -i "30i $ADD301_REDIRECT" /etc/nginx/sites-available/default 
+sudo service nginx start
+sudo nginx -t
+sudo systemctl restart nginx
