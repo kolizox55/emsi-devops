@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 #Script that will install nginx on a brand new ubuntu machine
-MYGITHUB="\\\tlocation /redirect_me {\n\t\t return 301 https://github.com/ziyadloubaris;\n\t}\n"
 apt-get -y update
 apt-get -y install nginx
 new_string="server_name _;\nlocation \/redirect_me {\nreturn 301 'https:\/\/www.youtube.com\/watch?v=lTRiuFIWV54';\n}\n"
