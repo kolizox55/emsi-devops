@@ -5,6 +5,6 @@ sudo apt-get install nginx -y
 ufw allow 'Nginx HTTP'
 sudo touch /var/www/html/custom_404.html
 echo "Holberton School" > /var/www/html/index.nginx-debian.html > /dev/null
-echo "Ceci n'est pas une page" > /var/www/html/index.nginx-debian.html > /dev/null
+echo "Ceci n'est pas une page" > /var/www/html/custom_404.html > /dev/null
 sudo sed -i "s/server_name _;/server_name _;\nerror_page 404 \/custom_404.html;\nlocation=\/custom_404.html{root /var/www/html;\ninternal;}" /etc/nginx/sites-enabled/default
 sudo service nginx restart
