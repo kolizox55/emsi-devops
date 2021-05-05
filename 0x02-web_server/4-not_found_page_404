@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-#Script that will install nginx on a brand new ubuntu machine
+#Script that will configure a custom 404 error page
 sudo apt-get update -y
 sudo apt-get install nginx -y
 ufw allow 'Nginx HTTP'
 sudo touch /var/www/html/custom_404.html
 echo "Holberton School" > /var/www/html/index.nginx-debian.html > /dev/null
+sed -i '/listen 80 default_server/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
 echo "Ceci n'est pas une page" > /var/www/html/custom_404.html > /dev/null
 sudo sed -i "s/server_name _;/server_name _;\nerror_page 404 \/custom_404.html;\nlocation=\/custom_404.html{root /var/www/html;\ninternal;}" /etc/nginx/sites-enabled/default
 sudo service nginx restart
