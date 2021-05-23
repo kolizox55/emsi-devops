@@ -42,6 +42,6 @@ frontend https_front
 
 backend web-backend
         balance roundrobin
-        server 3132-web-01 35.231.236.13:80 check
-        server 3132-web-02 35.231.53.147:80 check
+        server 3134-web-01 35.231.183.219:80 check
+        server 3134-web-02 34.75.228.34:80 check
 
