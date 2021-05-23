@@ -1,13 +1,32 @@
 #!/usr/bin/env bash
-# add hostname of the server in the header of the http response
-sudo apt-get update
-sudo apt-get -y install nginx
-sudo ufw allow 'Nginx HTTP'
-sudo service nginx start
-echo "Holberton School" | sudo tee /var/www/html/index.html
-sudo sed -i '/listen 80 default_server;/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
-echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/custom_404.html
-sudo sed -i '/listen 80 default_server;/a error_page 404 /custom_404.html;\nlocation = /custom_404.html {root /usr/share/nginx/html;\n internal;}' /etc/nginx/sites-available/default
-sudo sed -i '/listen 80 default_server;/a add_header X-Served-By 3134-web-01;' /etc/nginx/sites-available/default
-sudo service nginx restart
+# Installs Nginx with the following configurations:
+#    Listens on port 80.
+#    Returns a page containing "Holberton School" when queried
+#    at the root with a curl GET request.
+apt-get update
+apt-get install -y nginx
+mkdir /usr/share/nginx/html
+touch /usr/share/nginx/html/index.html
+touch /usr/share/nginx/html/404.html
+echo "Holberton School" > /usr/share/nginx/html/index.html
+echo "Ceci n'est pas une page" > /usr/share/nginx/html/404.html
+printf %s "
+    server {
+        listen      80 default_server;
+        listen      [::]:80 default_server;
+        add_header X-Served-By $HOSTNAME;
+        location / {
+            root      /usr/share/nginx/html/;
+            index     index.html;
+        }
+        location /redirect_me {
+            return 301 https://www.youtube.com/watch?v=8s22PZRXAIY;
+        }
+        error_page 404 /404.html;
+        location /404 {
+            internal;
+        } 
+    }
+" > /etc/nginx/sites-available/default
 
+service nginx restart
