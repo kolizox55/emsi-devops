@@ -10,3 +10,4 @@ echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/custom_404.html
 sudo sed -i '/listen 80 default_server;/a error_page 404 /custom_404.html;\nlocation = /custom_404.html {root /usr/share/nginx/html;\n internal;}' /etc/nginx/sites-available/default
 sudo sed -i '/listen 80 default_server;/a add_header X-Served-By 3134-web-01;' /etc/nginx/sites-available/default
 sudo service nginx restart
+
