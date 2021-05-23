@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
-#this script will add a http response header string 
-new_string="add_header  X-Served-By  $\hostname;\n# First attempt to serve request as file, then"
-ssh ubuntu@35.231.236.13 "sudo sed -i \"s/# First attempt to serve request as file, then/${new_string}/\" /etc/nginx/sites-enabled/default && sudo service nginx restart "
-ssh ubuntu@35.231.236.13 "cat /etc/nginx/sites-enabled/default" |  ssh ubuntu@35.231.53.147 "sudo apt-get update && sudo apt-get -y install nginx && sudo chmod a+rwx /etc/nginx/sites-enabled/default && cat > /etc/nginx/sites-enabled/default && sudo service nginx restart "
-
+# add hostname of the server in the header of the http response
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+sudo service nginx start
+echo "Holberton School" | sudo tee /var/www/html/index.html
+sudo sed -i '/listen 80 default_server;/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/custom_404.html
+sudo sed -i '/listen 80 default_server;/a error_page 404 /custom_404.html;\nlocation = /custom_404.html {root /usr/share/nginx/html;\n internal;}' /etc/nginx/sites-available/default
+sudo sed -i '/listen 80 default_server;/a add_header X-Served-By $HOSTNAME;' /etc/nginx/sites-available/default
+sudo service nginx restart
